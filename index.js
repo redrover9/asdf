@@ -28,7 +28,6 @@ async function selectVerse() {
     solution.push(selectedBook());
 
     const chapterQuery = { title: solution[0], versionTitle: "Tanakh: The Holy Scriptures, published by JPS", purchaseInformationImage: "https://storage.googleapis.com/sefaria-physical-editions/JPS_1985.png" };
-
     const uniqueChapters = await texts.distinct("chapter", chapterQuery);
     var chapters = [];
     for await (const chapter of uniqueChapters) {
@@ -38,9 +37,8 @@ async function selectVerse() {
     const selectedChapter = uniqueRandomArray(chapters);
     const selectedVerse = uniqueRandomArray(selectedChapter());
     solution.push(selectedVerse());
-    solution[1] = solution[1].replace(/<[^>]*>/g, "");
     return solution;
-  } finally {
+  } finally { 
     await client.close();
   }  
 }
